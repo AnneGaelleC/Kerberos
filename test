@@ -1,0 +1,1 @@
+kinit hdfs/slave-1.asgard.com@ASGARD.COM -k -t /etc/security/hdfs.service.keytab

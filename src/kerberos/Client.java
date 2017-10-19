@@ -17,23 +17,14 @@ import org.ietf.jgss.Oid;
 import sun.misc.BASE64Encoder;
  
 /**
- * <p>Client logs in to a Key Distribution Center (KDC) using JAAS and then
- * requests a service ticket for the server, base 64 encodes it and writes it
- * to the file <i>service-ticket.txt</i>.</p>
- * <p>This class, in combination with the <i>Server</i> class illustrates the
- * use of the JAAS and GSS APIs for initiating a security context using the
- * Kerberos protocol.</p>
- * <p>This requires a KDC/domain controller such as Active Directory or Apache
- * Directory. The KDC configuration details are stored in the
- * <i>client.properties</i> file, while the JAAS details are stored in the
- * file <i>jaas.conf</i>.</p>
- * @author Ants
+ * <p>Le client se connecte au Key Distribution Center (KDC) en utilisant JAAS puis
+ * demande un ticket pour le server, est l écrit dans le fichier<i>service-ticket.txt</i>.</p>
  */
 public class Client {
  
   public static void main( String[] args) {
     try {
-      // Setup up the Kerberos properties.
+      //  Kerberos propriétés.
       Properties props = new Properties();
       props.load( new FileInputStream( "/Users/anne-gaelle/Documents/Brésil/S2/SAS/KerberosV2/src/kerberos/client.properties"));
       System.setProperty( "sun.security.krb5.debug", "true");
@@ -80,10 +71,10 @@ public class Client {
   private Subject subject;
   private byte[] serviceTicket;
  
-  // Authenticate against the KDC using JAAS.
+  // Authentification KDC utilidant JAAS.
   private void login( String username, String password) throws LoginException {
     LoginContext loginCtx = null;
-    // "Client" references the JAAS configuration in the jaas.conf file.
+    // "Client" référe au JAAS configuration dans le fichier jaas.conf.
     loginCtx = new LoginContext( "Client",
         new LoginCallbackHandler( username, password));
     loginCtx.login();
@@ -117,7 +108,7 @@ public class Client {
  
   }
  
-  // Base64 encode the raw ticket and write it to the given file.
+  // Base64 code le ticket et l ajoute au fichier.
   private static void encodeAndWriteTicketToDisk( byte[] ticket, String filepath)
       throws IOException {
     BASE64Encoder encoder = new BASE64Encoder();    
